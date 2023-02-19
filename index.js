@@ -7,13 +7,15 @@ const bodyParser = require("body-parser");
 require("./src/authentication/local.strategy");
 require("./src/authentication/jwt.strategy");
 const passport = require("passport");
-
+const cors = require("cors")
 const app = express();
 const port = 3000;
-
+app.use(cors({
+  origin: 'https://locations-frontend-ksegvui97-jolyanem.vercel.app'
+}));
 app.use(bodyParser.json());
 
-// Protect all /locations route with JWT Authentication
+//Protect all /locations route with JWT Authentication
 app.use(
   "/locations",
   passport.authenticate("jwt", { session: false }),
